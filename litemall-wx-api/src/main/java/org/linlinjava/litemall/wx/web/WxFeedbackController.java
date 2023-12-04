@@ -27,67 +27,64 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/wx/feedback")
 @Validated
 public class WxFeedbackController {
-    private final Log logger = LogFactory.getLog(WxFeedbackController.class);
+  private final Log logger = LogFactory.getLog(WxFeedbackController.class);
 
-    @Autowired
-    private LitemallFeedbackService feedbackService;
-    @Autowired
-    private LitemallUserService userService;
+  @Autowired private LitemallFeedbackService feedbackService;
+  @Autowired private LitemallUserService userService;
 
-    private Object validate(LitemallFeedback feedback) {
-        String content = feedback.getContent();
-        if (StringUtils.isEmpty(content)) {
-            return ResponseUtil.badArgument();
-        }
-
-        String type = feedback.getFeedType();
-        if (StringUtils.isEmpty(type)) {
-            return ResponseUtil.badArgument();
-        }
-
-        Boolean hasPicture = feedback.getHasPicture();
-        if (hasPicture == null || !hasPicture) {
-            feedback.setPicUrls(new String[0]);
-        }
-
-        // 测试手机号码是否正确
-        String mobile = feedback.getMobile();
-        if (StringUtils.isEmpty(mobile)) {
-            return ResponseUtil.badArgument();
-        }
-        if (!RegexUtil.isMobileSimple(mobile)) {
-            return ResponseUtil.badArgument();
-        }
-        return null;
+  /**
+   * 添加意见反馈
+   *
+   * @param userId 用户ID
+   * @param feedback 意见反馈
+   * @return 操作结果
+   */
+  @PostMapping("submit")
+  public Object submit(@LoginUser Integer userId, @RequestBody LitemallFeedback feedback) {
+    if (userId == null) {
+      return ResponseUtil.unlogin();
+    }
+    Object error = validate(feedback);
+    if (error != null) {
+      return error;
     }
 
-    /**
-     * 添加意见反馈
-     *
-     * @param userId   用户ID
-     * @param feedback 意见反馈
-     * @return 操作结果
-     */
-    @PostMapping("submit")
-    public Object submit(@LoginUser Integer userId, @RequestBody LitemallFeedback feedback) {
-        if (userId == null) {
-            return ResponseUtil.unlogin();
-        }
-        Object error = validate(feedback);
-        if (error != null) {
-            return error;
-        }
+    LitemallUser user = userService.findById(userId);
+    String username = user.getUsername();
+    feedback.setId(null);
+    feedback.setUserId(userId);
+    feedback.setUsername(username);
+    // 状态默认是0，1表示状态已发生变化
+    feedback.setStatus(1);
+    feedbackService.add(feedback);
 
-        LitemallUser user = userService.findById(userId);
-        String username = user.getUsername();
-        feedback.setId(null);
-        feedback.setUserId(userId);
-        feedback.setUsername(username);
-        //状态默认是0，1表示状态已发生变化
-        feedback.setStatus(1);
-        feedbackService.add(feedback);
+    return ResponseUtil.ok();
+  }
 
-        return ResponseUtil.ok();
+  private Object validate(LitemallFeedback feedback) {
+    String content = feedback.getContent();
+    if (StringUtils.isEmpty(content)) {
+      return ResponseUtil.badArgument();
     }
 
+    String type = feedback.getFeedType();
+    if (StringUtils.isEmpty(type)) {
+      return ResponseUtil.badArgument();
+    }
+
+    Boolean hasPicture = feedback.getHasPicture();
+    if (hasPicture == null || !hasPicture) {
+      feedback.setPicUrls(new String[0]);
+    }
+
+    // 测试手机号码是否正确
+    String mobile = feedback.getMobile();
+    if (StringUtils.isEmpty(mobile)) {
+      return ResponseUtil.badArgument();
+    }
+    if (!RegexUtil.isMobileSimple(mobile)) {
+      return ResponseUtil.badArgument();
+    }
+    return null;
+  }
 }

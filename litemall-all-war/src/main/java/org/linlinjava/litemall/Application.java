@@ -14,12 +14,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableScheduling
 public class Application extends SpringBootServletInitializer {
 
-    public static void main(String[] args) throws Exception {
-        SpringApplication.run(Application.class, args);
-    }
+  public static void main(String[] args) throws Exception {
+    SpringApplication.run(Application.class, args);
+  }
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(Application.class);
-    }
+  @Override
+  protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+    return builder.sources(Application.class);
+  }
 }

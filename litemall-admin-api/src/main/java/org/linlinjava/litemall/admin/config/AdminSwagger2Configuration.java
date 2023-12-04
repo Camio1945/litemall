@@ -3,7 +3,6 @@ package org.linlinjava.litemall.admin.config;
 import com.github.xiaoymin.swaggerbootstrapui.annotations.EnableSwaggerBootstrapUI;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -19,30 +18,29 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @author enilu
  * @version 2018-07-24
  */
-
 @Configuration
 @EnableSwagger2
 @EnableSwaggerBootstrapUI
 public class AdminSwagger2Configuration {
-    @Bean
-    public Docket adminDocket() {
+  @Bean
+  public Docket adminDocket() {
 
-        return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("admin")
-                .apiInfo(adminApiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("org.linlinjava.litemall.admin.web"))
-                .paths(PathSelectors.any())
-                .build();
-    }
+    return new Docket(DocumentationType.SWAGGER_2)
+        .groupName("admin")
+        .apiInfo(adminApiInfo())
+        .select()
+        .apis(RequestHandlerSelectors.basePackage("org.linlinjava.litemall.admin.web"))
+        .paths(PathSelectors.any())
+        .build();
+  }
 
-    private ApiInfo adminApiInfo() {
-        return new ApiInfoBuilder()
-                .title("litemall-admin API")
-                .description("litemall管理后台API")
-                .termsOfServiceUrl("https://github.com/linlinjava/litemall")
-                .contact("https://github.com/linlinjava/litemall")
-                .version("1.0")
-                .build();
-    }
+  private ApiInfo adminApiInfo() {
+    return new ApiInfoBuilder()
+        .title("litemall-admin API")
+        .description("litemall管理后台API")
+        .termsOfServiceUrl("https://github.com/linlinjava/litemall")
+        .contact("https://github.com/linlinjava/litemall")
+        .version("1.0")
+        .build();
+  }
 }

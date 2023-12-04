@@ -14,14 +14,12 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class CreateShareImageTest {
-    @Autowired
-    QCodeService qCodeService;
-    @Autowired
-    LitemallGoodsService litemallGoodsService;
+  @Autowired QCodeService qCodeService;
+  @Autowired LitemallGoodsService litemallGoodsService;
 
-    @Test
-    public void test() {
-        LitemallGoods good = litemallGoodsService.findById(1181010);
-        qCodeService.createGoodShareImage(good.getId().toString(), good.getPicUrl(), good.getName());
-    }
+  @Test
+  public void test() {
+    LitemallGoods good = litemallGoodsService.findById(1181010);
+    qCodeService.createGoodShareImage(good.getId().toString(), good.getPicUrl(), good.getName());
+  }
 }

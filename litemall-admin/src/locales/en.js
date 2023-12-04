@@ -72,6 +72,7 @@ export default {
       delete: 'Delete',
       detail: 'Details',
       download: 'Download',
+      initTestData: 'Init test data',
       edit: 'Edit',
       permission: 'Permissions',
       reply: 'Reply',

@@ -1,6 +1,4 @@
-/**
- * Copyright 2018 bejson.com
- */
+/** Copyright 2018 bejson.com */
 package org.linlinjava.litemall.core.express.dao;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,25 +11,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Traces {
 
-    @JsonProperty("AcceptStation")
-    private String AcceptStation;
-    @JsonProperty("AcceptTime")
-    private String AcceptTime;
+  @JsonProperty("AcceptStation")
+  private String AcceptStation;
 
-    public String getAcceptStation() {
-        return AcceptStation;
-    }
+  @JsonProperty("AcceptTime")
+  private String AcceptTime;
 
-    public void setAcceptStation(String AcceptStation) {
-        this.AcceptStation = AcceptStation;
-    }
+  public String getAcceptStation() {
+    return AcceptStation;
+  }
 
-    public String getAcceptTime() {
-        return AcceptTime;
-    }
+  public void setAcceptStation(String AcceptStation) {
+    this.AcceptStation = AcceptStation;
+  }
 
-    public void setAcceptTime(String AcceptTime) {
-        this.AcceptTime = AcceptTime;
-    }
+  public String getAcceptTime() {
+    return AcceptTime;
+  }
 
+  public void setAcceptTime(String AcceptTime) {
+    this.AcceptTime = AcceptTime;
+  }
 }

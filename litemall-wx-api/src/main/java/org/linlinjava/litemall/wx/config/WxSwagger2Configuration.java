@@ -18,30 +18,29 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @author enilu
  * @version 2018-07-24
  */
-
 @Configuration
 @EnableSwagger2
 @EnableSwaggerBootstrapUI
 public class WxSwagger2Configuration {
-    @Bean
-    public Docket wxDocket() {
+  @Bean
+  public Docket wxDocket() {
 
-        return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("wx")
-                .apiInfo(wxApiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("org.linlinjava.litemall.wx.web"))
-                .paths(PathSelectors.any())
-                .build();
-    }
+    return new Docket(DocumentationType.SWAGGER_2)
+        .groupName("wx")
+        .apiInfo(wxApiInfo())
+        .select()
+        .apis(RequestHandlerSelectors.basePackage("org.linlinjava.litemall.wx.web"))
+        .paths(PathSelectors.any())
+        .build();
+  }
 
-    private ApiInfo wxApiInfo() {
-        return new ApiInfoBuilder()
-                .title("litemall-wx API")
-                .description("litemall小商场API")
-                .termsOfServiceUrl("https://github.com/linlinjava/litemall")
-                .contact("https://github.com/linlinjava/litemall")
-                .version("1.0")
-                .build();
-    }
+  private ApiInfo wxApiInfo() {
+    return new ApiInfoBuilder()
+        .title("litemall-wx API")
+        .description("litemall小商场API")
+        .termsOfServiceUrl("https://github.com/linlinjava/litemall")
+        .contact("https://github.com/linlinjava/litemall")
+        .version("1.0")
+        .build();
+  }
 }

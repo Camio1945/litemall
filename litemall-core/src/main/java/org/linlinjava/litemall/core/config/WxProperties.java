@@ -7,83 +7,83 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "litemall.wx")
 public class WxProperties {
 
-    private String appId;
+  private String appId;
 
-    private String appSecret;
+  private String appSecret;
 
-    private String mchId;
+  private String mchId;
 
-    private String mchKey;
+  private String mchKey;
 
-    private String notifyUrl;
+  private String notifyUrl;
 
-    private String keyPath;
+  private String keyPath;
 
-    private String token;
+  private String token;
 
-    private String aesKey;
+  private String aesKey;
 
-    public String getToken() {
-        return token;
-    }
+  public String getToken() {
+    return token;
+  }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
+  public void setToken(String token) {
+    this.token = token;
+  }
 
-    public String getAesKey() {
-        return aesKey;
-    }
+  public String getAesKey() {
+    return aesKey;
+  }
 
-    public void setAesKey(String aesKey) {
-        this.aesKey = aesKey;
-    }
+  public void setAesKey(String aesKey) {
+    this.aesKey = aesKey;
+  }
 
-    public String getNotifyUrl() {
-        return notifyUrl;
-    }
+  public String getNotifyUrl() {
+    return notifyUrl;
+  }
 
-    public void setNotifyUrl(String notifyUrl) {
-        this.notifyUrl = notifyUrl;
-    }
+  public void setNotifyUrl(String notifyUrl) {
+    this.notifyUrl = notifyUrl;
+  }
 
-    public String getMchKey() {
-        return mchKey;
-    }
+  public String getMchKey() {
+    return mchKey;
+  }
 
-    public void setMchKey(String mchKey) {
-        this.mchKey = mchKey;
-    }
+  public void setMchKey(String mchKey) {
+    this.mchKey = mchKey;
+  }
 
-    public String getAppId() {
-        return this.appId;
-    }
+  public String getAppId() {
+    return this.appId;
+  }
 
-    public void setAppId(String appId) {
-        this.appId = appId;
-    }
+  public void setAppId(String appId) {
+    this.appId = appId;
+  }
 
-    public String getAppSecret() {
-        return appSecret;
-    }
+  public String getAppSecret() {
+    return appSecret;
+  }
 
-    public void setAppSecret(String appSecret) {
-        this.appSecret = appSecret;
-    }
+  public void setAppSecret(String appSecret) {
+    this.appSecret = appSecret;
+  }
 
-    public String getMchId() {
-        return mchId;
-    }
+  public String getMchId() {
+    return mchId;
+  }
 
-    public void setMchId(String mchId) {
-        this.mchId = mchId;
-    }
+  public void setMchId(String mchId) {
+    this.mchId = mchId;
+  }
 
-    public String getKeyPath() {
-        return keyPath;
-    }
+  public String getKeyPath() {
+    return keyPath;
+  }
 
-    public void setKeyPath(String keyPath) {
-        this.keyPath = keyPath;
-    }
+  public void setKeyPath(String keyPath) {
+    this.keyPath = keyPath;
+  }
 }

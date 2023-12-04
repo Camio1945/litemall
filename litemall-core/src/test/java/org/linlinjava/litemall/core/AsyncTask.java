@@ -7,16 +7,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AsyncTask {
-    private final Log logger = LogFactory.getLog(AsyncTask.class);
+  private final Log logger = LogFactory.getLog(AsyncTask.class);
 
-    @Async
-    public void asyncMethod() {
-        logger.info("Execute method asynchronously. "
-                + Thread.currentThread().getName());
-    }
+  @Async
+  public void asyncMethod() {
+    logger.info("Execute method asynchronously. " + Thread.currentThread().getName());
+  }
 
-    public void nonasyncMethod() {
-        logger.info("Execute method nonasynchronously. "
-                + Thread.currentThread().getName());
-    }
+  public void nonasyncMethod() {
+    logger.info("Execute method nonasynchronously. " + Thread.currentThread().getName());
+  }
 }

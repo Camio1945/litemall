@@ -15,20 +15,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Order(value = Ordered.HIGHEST_PRECEDENCE)
 public class ShiroExceptionHandler {
 
-    private final Log logger = LogFactory.getLog(ShiroExceptionHandler.class);
+  private final Log logger = LogFactory.getLog(ShiroExceptionHandler.class);
 
-    @ExceptionHandler(AuthenticationException.class)
-    @ResponseBody
-    public Object unauthenticatedHandler(AuthenticationException e) {
-        logger.warn(e.getMessage(), e);
-        return ResponseUtil.unlogin();
-    }
+  @ExceptionHandler(AuthenticationException.class)
+  @ResponseBody
+  public Object unauthenticatedHandler(AuthenticationException e) {
+    logger.warn(e.getMessage(), e);
+    return ResponseUtil.unlogin();
+  }
 
-    @ExceptionHandler(AuthorizationException.class)
-    @ResponseBody
-    public Object unauthorizedHandler(AuthorizationException e) {
-        logger.warn(e.getMessage(), e);
-        return ResponseUtil.unauthz();
-    }
-
+  @ExceptionHandler(AuthorizationException.class)
+  @ResponseBody
+  public Object unauthorizedHandler(AuthorizationException e) {
+    logger.warn(e.getMessage(), e);
+    return ResponseUtil.unauthz();
+  }
 }

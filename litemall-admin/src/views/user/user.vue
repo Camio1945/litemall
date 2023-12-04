@@ -3,15 +3,57 @@
 
     <!-- 查询和其他操作 -->
     <div class="filter-container">
-      <el-input v-model="listQuery.username" clearable class="filter-item" style="width: 200px;" :placeholder="$t('user_user.placeholder.filter_username')"/>
-      <el-input v-model="listQuery.userId" clearable class="filter-item" style="width: 200px;" :placeholder="$t('user_user.placeholder.filter_user_id')"/>
-      <el-input v-model="listQuery.mobile" clearable class="filter-item" style="width: 200px;" :placeholder="$t('user_user.placeholder.filter_mobile')"/>
-      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">{{ $t('app.button.search') }}</el-button>
-      <el-button :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">{{ $t('app.button.download') }}</el-button>
+      <el-input
+        v-model="listQuery.username"
+        clearable
+        class="filter-item"
+        style="width: 200px;"
+        :placeholder="$t('user_user.placeholder.filter_username')"
+      />
+      <el-input
+        v-model="listQuery.userId"
+        clearable
+        class="filter-item"
+        style="width: 200px;"
+        :placeholder="$t('user_user.placeholder.filter_user_id')"
+      />
+      <el-input
+        v-model="listQuery.mobile"
+        clearable
+        class="filter-item"
+        style="width: 200px;"
+        :placeholder="$t('user_user.placeholder.filter_mobile')"
+      />
+      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
+        {{ $t('app.button.search') }}
+      </el-button>
+      <el-button
+        :loading="downloadLoading"
+        class="filter-item"
+        type="primary"
+        icon="el-icon-download"
+        @click="handleDownload"
+      >{{ $t('app.button.download') }}
+      </el-button>
+      <el-button
+        :loading="initLoading"
+        class="filter-item"
+        type="primary"
+        icon="el-icon-plus"
+        @click="handleInitTestData"
+      >{{ $t('app.button.initTestData') }}
+      </el-button>
     </div>
 
     <!-- 查询结果 -->
-    <el-table v-loading="listLoading" :data="list" :element-loading-text="$t('app.message.list_loading')" border fit highlight-current-row>
+    <el-table
+      v-loading="listLoading"
+      :data="list"
+      :element-loading-text="$t('app.message.list_loading')"
+      border
+      fit
+      highlight-current-row
+    >
       <el-table-column align="center" width="100px" :label="$t('user_user.table.id')" prop="id" sortable />
 
       <el-table-column align="center" :label="$t('user_user.table.nickname')" prop="nickname" />
@@ -26,7 +68,7 @@
 
       <el-table-column align="center" :label="$t('user_user.table.gender')" prop="gender">
         <template slot-scope="scope">
-          <el-tag >{{ genderDic[scope.row.gender] }}</el-tag>
+          <el-tag>{{ genderDic[scope.row.gender] }}</el-tag>
         </template>
       </el-table-column>
 
@@ -34,7 +76,7 @@
 
       <el-table-column align="center" :label="$t('user_user.table.user_level')" prop="userLevel">
         <template slot-scope="scope">
-          <el-tag >{{ levelDic[scope.row.userLevel] }}</el-tag>
+          <el-tag>{{ levelDic[scope.row.userLevel] }}</el-tag>
         </template>
       </el-table-column>
 
@@ -43,17 +85,38 @@
           <el-tag>{{ statusDic[scope.row.status] }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column align="center" :label="$t('user_user.table.actions')" width="250" class-name="small-padding fixed-width">
+      <el-table-column
+        align="center"
+        :label="$t('user_user.table.actions')"
+        width="250"
+        class-name="small-padding fixed-width"
+      >
         <template slot-scope="scope">
-          <el-button type="primary" size="mini" @click="handleDetail(scope.row)">{{ $t('app.button.detail') }}</el-button>
+          <el-button type="primary" size="mini" @click="handleDetail(scope.row)">{{
+            $t('app.button.detail')
+          }}
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
+    <pagination
+      v-show="total>0"
+      :total="total"
+      :page.sync="listQuery.page"
+      :limit.sync="listQuery.limit"
+      @pagination="getList"
+    />
     <!-- 用户编辑对话框 -->
     <el-dialog :visible.sync="userDialogVisible" :title="$t('user_user.dialog.edit')">
-      <el-form ref="userDetail" :model="userDetail" status-icon label-position="left" label-width="100px" style="width: 400px; margin-left:50px;">
+      <el-form
+        ref="userDetail"
+        :model="userDetail"
+        status-icon
+        label-position="left"
+        label-width="100px"
+        style="width: 400px; margin-left:50px;"
+      >
         <el-form-item :label="$t('user_user.form.username')" prop="username">
           <el-input v-model="userDetail.username" :disabled="true" />
         </el-form-item>
@@ -64,13 +127,19 @@
           <el-input v-model="userDetail.mobile" />
         </el-form-item>
         <el-form-item :label="$t('user_user.form.gender')" prop="gender">
-          <el-select v-model="userDetail.gender" :placeholder="$t('user_user.placeholder.gender')"><el-option v-for="(item, index) in genderDic" :key="index" :label="item" :value="index" /></el-select>
+          <el-select v-model="userDetail.gender" :placeholder="$t('user_user.placeholder.gender')">
+            <el-option v-for="(item, index) in genderDic" :key="index" :label="item" :value="index" />
+          </el-select>
         </el-form-item>
         <el-form-item :label="$t('user_user.form.user_level')" prop="userLevel">
-          <el-select v-model="userDetail.userLevel" :placeholder="$t('user_user.placeholder.user_level')"><el-option v-for="(item, index) in levelDic" :key="index" :label="item" :value="index" /></el-select>
+          <el-select v-model="userDetail.userLevel" :placeholder="$t('user_user.placeholder.user_level')">
+            <el-option v-for="(item, index) in levelDic" :key="index" :label="item" :value="index" />
+          </el-select>
         </el-form-item>
         <el-form-item :label="$t('user_user.form.status')" prop="status">
-          <el-select v-model="userDetail.status" :placeholder="$t('user_user.placeholder.status')"><el-option v-for="(item, index) in statusDic" :key="index" :label="item" :value="index" /></el-select>
+          <el-select v-model="userDetail.status" :placeholder="$t('user_user.placeholder.status')">
+            <el-option v-for="(item, index) in statusDic" :key="index" :label="item" :value="index" />
+          </el-select>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -82,7 +151,7 @@
 </template>
 
 <script>
-import { fetchList ,userDetail ,updateUser } from '@/api/user'
+import { fetchList, userDetail, updateUser, initTestData } from '@/api/user'
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
 
 export default {
@@ -103,12 +172,12 @@ export default {
         order: 'desc'
       },
       downloadLoading: false,
+      initLoading: false,
       genderDic: ['未知', '男', '女'],
       levelDic: ['普通用户', 'VIP用户', '高级VIP用户'],
       statusDic: ['可用', '禁用', '注销'],
       userDialogVisible: false,
-      userDetail:{
-      }
+      userDetail: {}
     }
   },
   created() {
@@ -117,14 +186,14 @@ export default {
   methods: {
     getList() {
       this.listLoading = true
-      if(this.listQuery.userId){
+      if (this.listQuery.userId) {
         userDetail(this.listQuery.userId).then(response => {
-          this.list = [];
-          if(response.data.data){
+          this.list = []
+          if (response.data.data) {
             this.list.push(response.data.data)
             this.total = 1
             this.listLoading = false
-          }else{
+          } else {
             this.list = []
             this.total = 0
             this.listLoading = false
@@ -134,7 +203,7 @@ export default {
           this.total = 0
           this.listLoading = false
         })
-      }else{
+      } else {
         fetchList(this.listQuery).then(response => {
           this.list = response.data.data.list
           this.total = response.data.data.total
@@ -159,12 +228,24 @@ export default {
         this.downloadLoading = false
       })
     },
+    handleInitTestData() {
+      this.initLoading = true
+      initTestData()
+        .then((response) => {
+          this.$notify.success({ title: '成功', message: '初始化成功' })
+          this.initLoading = false
+        })
+        .catch(response => {
+          this.$notify.error({ title: '失败', message: response.data.errmsg })
+          this.initLoading = false
+        })
+    },
     handleDetail(row) {
       this.userDetail = row
       this.userDialogVisible = true
     },
-    handleUserUpdate(){
-     updateUser(this.userDetail)
+    handleUserUpdate() {
+      updateUser(this.userDetail)
         .then((response) => {
           this.userDialogVisible = false
           this.$notify.success({

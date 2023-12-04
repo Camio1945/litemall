@@ -72,6 +72,7 @@ export default {
       delete: '删除',
       detail: '详情',
       download: '导出',
+      initTestData: '初始化测试数据',
       edit: '编辑',
       permission: '授权',
       reply: '回复',

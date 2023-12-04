@@ -11,15 +11,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringBootTest
 public class BcryptTest {
 
-    @Test
-    public void test() {
-        String rawPassword = "aaaaaa";
-        String encodedPassword = "";
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        encodedPassword = bCryptPasswordEncoder.encode(rawPassword);
+  @Test
+  public void test() {
+    String rawPassword = "aaaaaa";
+    String encodedPassword = "";
+    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+    encodedPassword = bCryptPasswordEncoder.encode(rawPassword);
 
-        System.out.println("rawPassword=" + rawPassword + " encodedPassword=" + encodedPassword);
+    System.out.println("rawPassword=" + rawPassword + " encodedPassword=" + encodedPassword);
 
-        Assert.assertTrue(bCryptPasswordEncoder.matches(rawPassword, encodedPassword));
-    }
+    Assert.assertTrue(bCryptPasswordEncoder.matches(rawPassword, encodedPassword));
+  }
 }

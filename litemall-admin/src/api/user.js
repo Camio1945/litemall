@@ -12,7 +12,7 @@ export function userDetail(id) {
   return request({
     url: '/user/detail',
     method: 'get',
-    params: {id}
+    params: { id }
   })
 }
 
@@ -61,5 +61,12 @@ export function listHistory(query) {
     url: '/history/list',
     method: 'get',
     params: query
+  })
+}
+
+export function initTestData() {
+  return request({
+    url: '/user/initTestData',
+    method: 'post'
   })
 }

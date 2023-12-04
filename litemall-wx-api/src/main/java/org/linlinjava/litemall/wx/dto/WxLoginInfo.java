@@ -1,22 +1,22 @@
 package org.linlinjava.litemall.wx.dto;
 
 public class WxLoginInfo {
-    private String code;
-    private UserInfo userInfo;
+  private String code;
+  private UserInfo userInfo;
 
-    public String getCode() {
-        return code;
-    }
+  public String getCode() {
+    return code;
+  }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+  public void setCode(String code) {
+    this.code = code;
+  }
 
-    public UserInfo getUserInfo() {
-        return userInfo;
-    }
+  public UserInfo getUserInfo() {
+    return userInfo;
+  }
 
-    public void setUserInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
-    }
+  public void setUserInfo(UserInfo userInfo) {
+    this.userInfo = userInfo;
+  }
 }
